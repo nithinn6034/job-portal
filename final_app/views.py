@@ -9,7 +9,11 @@ from final_app.models import AppliedJob, addjob, adminmodel, detail_of_jobseeker
 from django.shortcuts import  get_object_or_404
 User = get_user_model()
 import re
+from django.db.models import Q # Ensure this is imported
 
+from django.shortcuts import render
+from .models import addjob, AppliedJob
+from django.db.models import Q
 
 def about(request):
     return render (request,'about.html')
@@ -54,16 +58,11 @@ def addjobadmin(request):
     return render (request,'addjobadmin.html')
 
 def tracker_user(request):
-    # 1. Get all jobs applied for by the logged-in user
-    # 2. Use select_related to grab Job and Company names in one go
     user_apps = AppliedJob.objects.filter(user=request.user).order_by('-applied_at')
-    
-    # 3. Pass 'user_apps' to the template
     return render(request, 'tracker_user.html', {'user_apps': user_apps})
 
 
 def job_applied_admin(request):
-    # 1. Identify the recruiter
     current_admin = adminmodel.objects.get(jobadmin=request.user)
     
     # 2. Handle the Status Update
@@ -132,7 +131,7 @@ def add_det_for_jobuser(request):
     
     if exists:
         # Option A: Redirect them immediately
-        messages.info(request, "You have already completed your profile.")
+       
         return redirect('view_resume_user') 
     
     return render(request, 'add_det_for_jobuser.html', {'user': request.user})
@@ -150,12 +149,6 @@ def add_job_list_delete(request,pk):
     return render(request,'add_job_list_delete.html',{'ad':ad})
 
 
-
-from django.db.models import Q # Ensure this is imported
-
-from django.shortcuts import render
-from .models import addjob, AppliedJob
-from django.db.models import Q
 
 def vac_of_job(request):
     query = request.GET.get('search')
@@ -340,7 +333,7 @@ def adminsignup_load(request):
         )
         job_profile.save()
         
-        messages.success(request, 'Account created successfully!')
+       
         return redirect('login_load_admin')
 
     # If GET request, just show the page
@@ -365,7 +358,6 @@ def adminlog_load(request):
             if admin_profile:
                 # 2. Login and redirect to Admin dashboard
                 auth.login(request, user)
-                # messages.info(request, f"Welcome, {susername} ({admin_profile.company_name})")
                 return redirect('adminfront_load')
             else:
                 # 3. User exists, but isn't an Admin (maybe they are a Jobseeker)
@@ -579,7 +571,7 @@ def job_seeker_list_main_edit(request, pk):
         if len(phone) == 10 and phone.isdigit():
             ad.phonenumber = phone
             ad.save()
-            messages.success(request, "Phone number updated successfully!")
+           
             return redirect('your_list_view_name') # Redirect back to the list
         else:
             messages.error(request, "Phone number must be exactly 10 digits.")
