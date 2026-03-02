@@ -394,7 +394,7 @@ def add_job(request):
             job_qualification=quali
         )
         add.save()
-        messages.success(request, "Job added successfully!")
+
         return redirect ('addjobadmin')
 
 def det_fo_jobuser_save(request):
@@ -444,7 +444,7 @@ def det_fo_jobuser_save(request):
         )
         detail.save()
         
-        messages.success(request, "Details added successfully!")
+   
         return redirect('userfront_load')
 
     return redirect('add_det_for_jobuser')
@@ -547,7 +547,7 @@ def recru_list_main_edit_load (request,pk):
         use.save()
         admi.company_name=request.POST.get('com_name')
         admi.save()
-        messages.success(request, "edited  successfully!")
+       
         return redirect ('recru_list_main')
     return redirect('recru_list_main')
 
