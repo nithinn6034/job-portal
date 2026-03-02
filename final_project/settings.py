@@ -28,7 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['job-portal-2-h0xa.onrender.com', '127.0.0.1', 'localhost']
 # settings.py
-
+# settings.py
+WHITENOISE_USE_FINDERS = True
 
 
 # Application definition
