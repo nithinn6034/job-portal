@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="{% url 'user_detail_user_edit_load' a.id %}" method="post" >
+        {% csrf_token %}
+
+        <input type="text" name="fname" value="{{a.jobseeker.first_name}}" >
+        <input type="text" name="lname" value="{{a.jobseeker.last_name}}" >
+        <input type="email" name="email" value="{{a.jobseeker.email}}" >
+        <input type="text" name="username" value="{{a.jobseeker.username}}" >
+        <input type="number" name="phonum" value="{{a.phonenumber}}" >
+<button type="submit" >ok </button>
+
+    </form>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Job Seeker</title>
+    <link rel="stylesheet" href="{% static 'css/job_seeker_list_main_edit.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="edit-container">
+        <div class="edit-card">
+            <div class="card-header">
+                <h2>Update Candidate Details</h2>
+                <p>Modify the information for <strong>{{a.jobseeker.username}}</strong></p>
+            </div>
+            
+            <form action="{% url 'job_seeker_list_main_edit_load' a.id %}" method="post">
+                {% csrf_token %}
+
+                <div class="input-grid">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" name="fname" value="{{a.jobseeker.first_name}}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" name="lname" value="{{a.jobseeker.last_name}}" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" value="{{a.jobseeker.email}}" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" name="username" value="{{a.jobseeker.username}}" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number (10 Digits)</label>
+                    <input 
+                        type="tel" 
+                        name="pnum" 
+                        value="{{a.phonenumber}}" 
+                        minlength="10" 
+                        maxlength="10" 
+                        pattern="[0-9]{10}" 
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+                        placeholder="e.g. 9876543210"
+                        required
+                    >
+                    <small>Only numbers allowed.</small>
+                </div>
+
+                <div class="form-actions">
+
+                    <a href="javascript:history.back()" class="btn-secondary">Cancel</a>
+                    <button type="submit" class="btn-primary">Save Changes</button>
+                               
+                </div>
+                 
+            </form>
+        </div>
+    </div>
+</body>
+</html>

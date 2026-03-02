@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Application Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/jobappliedadmin.css' %}">
+    
+    <style>
+        /* Message Alert Styles */
+        .messages-container {
+            margin-bottom: 25px;
+            animation: slideDown 0.4s ease-out;
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border: 1px solid transparent;
+        }
+
+        /* Styling for "Approved" (Success) */
+        .alert-success {
+            background-color: #ecfdf5;
+            color: #059669;
+            border-left: 6px solid #10b981;
+        }
+
+        /* Styling for "Rejected" (Warning/Error) */
+        .alert-error, .alert-warning {
+            background-color: #fef2f2;
+            color: #b91c1c;
+            border-left: 6px solid #ef4444;
+        }
+
+        /* Styling for General Info */
+        .alert-info {
+            background-color: #eff6ff;
+            color: #2563eb;
+            border-left: 6px solid #3b82f6;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Ensure the dashboard spacing looks clean */
+        .dashboard-container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+    
+    {% if messages %}
+        <div class="messages-container">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    <i class="fas {% if 'success' in message.tags %}fa-check-circle{% elif 'error' in message.tags %}fa-times-circle{% else %}fa-info-circle{% endif %}"></i>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="stats-grid">
+        <div class="stat-card total">
+            <div class="stat-icon"><i class="fas fa-users"></i></div>
+            <div class="stat-info">
+                <h3>{{ applications|length }}</h3>
+                <p>Total Applied</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-card">
+        <div class="card-header">
+            <h2>Recent Applications</h2>
+            <a href="{% url 'adminfront_load' %}" class="btn-dashboard">
+                <i class="fas fa-arrow-left"></i> Dashboard
+            </a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="modern-table">
+                <thead>
+                    <tr>
+                        <th>Candidate Profile</th>
+                        <th>Applied For</th>
+                        <th>Status</th>
+                        <th style="text-align: center;">Decision</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for app in applications %}
+                    <tr>
+                        <td>
+                            <div class="profile-box">
+                                <div class="avatar-circle">
+                                    {{ app.user.first_name|slice:":1" }}{{ app.user.last_name|slice:":1" }}
+                                </div>
+                                <div class="name-meta">
+                                    <span class="user-fullname">{{ app.user.first_name }} {{ app.user.last_name }}</span>
+                                    <span class="user-mail">{{ app.user.email }}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="job-pill">{{ app.job.job_name }}</div>
+                        </td>
+                        <td>
+                            <span class="status-badge {{ app.status|lower }}">
+                                <i class="fas fa-circle"></i> {{ app.status }}
+                            </span>
+                        </td>
+                        <td class="actions-cell">
+                            <form method="post" class="action-form">
+                                {% csrf_token %}
+                                <input type="hidden" name="app_id" value="{{ app.id }}">
+                                
+                                <button type="submit" name="status" value="Accepted" class="btn-icon accept" title="Accept Candidate">
+                                    <i class="fas fa-check-circle"></i>
+                                </button>
+                                <button type="submit" name="status" value="Declined" class="btn-icon decline" title="Decline Candidate">
+                                    <i class="fas fa-times-circle"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" class="empty-state">
+                            <img src="https://cdn-icons-png.flaticon.com/512/7486/7486744.png" alt="empty" width="60">
+                            <p>No applications found in the records.</p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Optional: Auto-hide messages after 5 seconds
+    setTimeout(function() {
+        let messages = document.querySelector('.messages-container');
+        if (messages) {
+            messages.style.transition = "opacity 0.5s ease";
+            messages.style.opacity = "0";
+            setTimeout(() => messages.remove(), 500);
+        }
+    }, 5000);
+</script>
+
+</body>
+</html>

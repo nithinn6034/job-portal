@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talent Management | Admin</title>
+    <link rel="stylesheet" href="{% static 'css/view_user_pro_adimin.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="admin-nav">
+        <div class="nav-content">
+            <div class="logo">Admin<span>Portal</span></div>
+            <div class="nav-links">
+                <a href="{% url 'adminfront_load' %}">Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="control-bar">
+            <div class="header-text">
+                <h1>Candidate Directory</h1>
+                <p>Search and manage your talent pool</p>
+            </div>
+            
+            <div class="search-container">
+                <form method="GET" action="{% url 'view_user_pro_admin' %}" class="search-form">
+                    <div class="search-wrapper">
+                        <input type="text" name="search" placeholder="Search name, skill, location, or experience..." value="{{ search_query|default:'' }}">
+                        <button type="submit" class="btn-search">Search</button>
+                        
+                        {% if search_query %}
+                            <a href="{% url 'view_user_pro_admin' %}" class="btn-reset">Reset Filter</a>
+                        {% endif %}
+                    </div>
+                </form>
+                
+                {% if search_query %}
+                    <p class="search-results-text">Showing results for: <strong>"{{ search_query }}"</strong></p>
+                {% endif %}
+            </div>
+        </section>
+
+        <div class="table-card">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Candidate</th>
+                        <th>Contact Info</th>
+                        <th>Education</th>
+                        <th>Skills</th>
+                        <th>Experience</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in a %}
+                    <tr>
+                        <td>
+                            <div class="name-box">
+                                <span class="avatar-initial">{{ i.f_name|slice:":1" }}</span>
+                                <div>
+                                    <div class="full-name">{{ i.f_name }} {{ i.l_name }}</div>
+                                    <div class="location-text">📍 {{ i.location }}</div>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="email-text">{{ i.email }}</div>
+                            <div class="phone-text">{{ i.phonenumber }}</div>
+                        </td>
+
+                        <td>
+                            <div class="badge-quali">{{ i.lat_quali }}</div>
+                        </td>
+
+                        <td>
+                            <div class="skill-container">
+                                {% for s in i.get_skills_list %}
+                                    <span class="skill-pill">{{ s }}</span>
+                                {% empty %}
+                                    <span class="no-skill">No skills added</span>
+                                {% endfor %}
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="exp-count">{{ i.year_of_exp }} Years</div>
+                        </td>
+
+                        <td class="action-cell">
+                            <a href="{% url 'view_user_pro_admin_edit' i.id %}" class="edit-btn">Edit</a>
+                            <a href="{% url 'view_user_pro_admin_delete' i.id %}" class="delete-btn" onclick="return confirm('Confirm delete? This action cannot be undone.');">Delete</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="empty-row">
+                            <div class="no-results">
+                                <p>No candidates found matching your criteria.</p>
+                                {% if search_query %}
+                                    <a href="{% url 'view_user_pro_admin' %}">Clear search filters</a>
+                                {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer class="admin-footer">
+        <div class="footer-content">
+            <p>&copy; 2026 CareerMatch Admin System</p>
+            <div class="footer-links">
+                <span>Logged in as <strong>Admin</strong></span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

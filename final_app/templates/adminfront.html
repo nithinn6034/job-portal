@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruiter Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/adminfront.css' %}">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <span>Job<span>Portal</span></span>
+            </div>
+            <nav class="top-nav">
+                <a href="#" class="active">Dashboard</a>
+                <a href="{% url 'added_job_list' %}">Manage Jobs</a>
+                <a href="{% url 'personal_detail_admin' %}">Profile</a>
+            </nav>
+            <div class="user-meta">
+    <button class="notif-btn"><i class="fa-regular fa-bell"></i></button>
+    <div class="avatar">A</div>
+    
+    <form action="{% url 'logout' %}" method="POST" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="logout-btn-header" title="Logout">
+            <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
+    </form>
+</div>
+            <div class="user-meta">
+                <button class="notif-btn"><i class="fa-regular fa-bell"></i></button>
+                <div class="avatar">A</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-area">
+        <div class="container">
+            <section class="welcome-bar">
+                <div class="text">
+                    <h1>Recruiter Control Panel</h1>
+                    <p>Wednesday, February 13, 2026</p>
+                </div>
+                <a href="{% url 'addjobadmin' %}" class="primary-btn">
+                    <i class="fa-solid fa-plus"></i> Create Job Post
+                </a>
+            </section>
+
+            <div class="function-grid">
+                
+                <a href="{% url 'job_applied_admin' %}" class="f-card">
+                    <div class="f-icon bg-soft-blue"><i class="fa-solid fa-user-tie"></i></div>
+                    <div class="f-info">
+                        <h3>Job Applied Users</h3>
+                        <p>Track candidate applications</p>
+                    </div>
+                </a>
+
+                <a href="{% url 'view_user_pro_admin' %}" class="f-card">
+                    <div class="f-icon bg-soft-green"><i class="fa-solid fa-magnifying-glass"></i></div>
+                    <div class="f-info">
+                        <h3>Talent Search</h3>
+                        <p>View job seekers profile</p>
+                    </div>
+                </a>
+
+                <a href="{% url 'personal_detail_admin' %}" class="f-card">
+                    <div class="f-icon bg-soft-orange"><i class="fa-solid fa-id-badge"></i></div>
+                    <div class="f-info">
+                        <h3>Personal Detail</h3>
+                        <p>Update your recruiter profile</p>
+                    </div>
+                </a>
+
+                <a href="{% url 'added_job_list' %}" class="f-card">
+                    <div class="f-icon bg-soft-purple"><i class="fa-solid fa-list-check"></i></div>
+                    <div class="f-info">
+                        <h3>Added Job List</h3>
+                        <p>Modify or view active jobs</p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

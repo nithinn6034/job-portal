@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruiter Management</title>
+    <link rel="stylesheet" href="{% static 'css/recru_list_main.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="page-header">
+            <div>
+                <h1>Recruiter Directory</h1>
+                <p>Manage and audit registered recruiting partners</p>
+            </div>
+            <a href="{% url 'main_admin' %}" class="btn-secondary">← Back to Dashboard</a>
+        </header>
+
+        <section class="table-card">
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Full Name</th>
+                            <th>Email Address</th>
+                            <th>Username</th>
+                            <th>Company</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in a %}
+                        <tr>
+                            <td>
+                                <span class="font-bold">{{ i.jobadmin.first_name }} {{ i.jobadmin.last_name }}</span>
+                            </td>
+                            <td>{{ i.jobadmin.email }}</td>
+                            <td><code class="user-badge">@{{ i.jobadmin.username }}</code></td>
+                            <td>{{ i.company_name }}</td>
+                            <td class="action-cell">
+                                <a href="{% url 'recru_list_main_edit' i.id %}" class="action-btn edit">Edit</a>
+                                <a href="{% url 'recru_list_main_delete' i.id %}" class="action-btn delete" onclick="return confirm('Are you sure?')">Delete</a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" class="empty-state">No recruiters found in the database.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

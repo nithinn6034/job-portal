@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerMatch | Professional Portal</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="pro-theme">
+
+    <header class="site-header">
+        <div class="container">
+            <div class="brand">
+                <div class="logo-icon"></div>
+                <span class="logo-text">CAREER<span>MATCH</span></span>
+            </div>
+            <nav class="main-nav">
+                <!-- <a href="/" class="active">Home</a> -->
+                
+                <a href="{% url 'about' %}" class="nav-btn-outline">About Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page-content">
+        <section class="hero-header">
+            <h1>Your next chapter <br>starts with a connection.</h1>
+            <p>The bridge between exceptional talent and world-class companies.</p>
+        </section>
+
+        <div class="entry-grid">
+            <div class="entry-card">
+                <div class="card-body">
+                    <span class="category-label">For Professionals</span>
+                    <h2>Find your dream role</h2>
+                    <p>Access exclusive listings and get noticed by top-tier recruiters worldwide.</p>
+                    <div class="action-row">
+                        <a href="{% url 'login_load_user' %}" class="btn-solid">Log In</a>
+                        <a href="{% url 'signup_load_user' %}" class="btn-text">Join for free →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="entry-card accent">
+                <div class="card-body">
+                    <span class="category-label">For Employers</span>
+                    <h2>Hire elite talent</h2>
+                    <p>Scale your team with verified experts. Post jobs and manage candidates efficiently.</p>
+                    <div class="action-row">
+                        <a href="{% url 'login_load_admin' %}" class="btn-solid">Admin Access</a>
+                        <a href="{% url 'signup_load_admin' %}" class="btn-text">Register Company →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-info">
+                    <span class="logo-text">CAREER<span>MATCH</span></span>
+                    <p>Connecting the global workforce since 2024.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Platform</h4>
+                        <a href="#">Browse Jobs</a>
+                        <a href="#">Pricing</a>
+                    </div>
+                    <div class="link-group">
+                        <h4>Support</h4>
+                        <a href="/contact">Contact Support</a>
+                        <a href="#">Help Center</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CareerMatch. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

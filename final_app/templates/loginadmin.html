@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruiter Login | Talent Portal</title>
+    <link rel="stylesheet" href="{% static 'css/loginadmin.css' %}">
+</head>
+<body>
+    <div class="login-container">
+        <form action="{% url 'adminlog_load' %}" method="post" class="login-form">
+            {% csrf_token %}
+            <h2>Recruiter Portal</h2>
+            <p class="subtitle">Enter your credentials to manage candidates</p>
+            
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="e.g. admin_recruiter" required>
+            </div>
+
+            <div class="input-group">
+                <label for="pass">Password</label>
+                <input type="password" id="pass" name="pass" placeholder="••••••••" required>
+            </div>
+            
+            <button type="submit" class="login-btn">Sign In</button>
+            
+            <div class="form-footer">
+                <a href="{% url 'signup_load_admin' %}">BACK TO SIGNUP PAGE</a>  <br>
+<a href="{% url 'display' %}">Back to Dashboard</a>
+            </div>
+               {% if messages %}
+                    <div class="message-container">
+                        {% for i in messages %}
+                            <p class="error-msg">{{ i }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+        </form>
+    </div>
+</body>
+</html>

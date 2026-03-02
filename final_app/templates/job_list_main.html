@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Postings Management</title>
+    <link rel="stylesheet" href="{% static 'css/job_list_main.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="admin-container">
+        <header class="main-header">
+            <div class="header-text">
+                <h1>Active Job Postings</h1>
+                <p>Monitor and moderate all live career opportunities</p>
+            </div>
+            <a href="{% url 'main_admin' %}" class="btn-back">Dashboard Overview</a>
+        </header>
+
+        <div class="table-card">
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Role & Position</th>
+                            <th>Requirements</th>
+                            <th>Target Skills</th>
+                            <th>Annual Salary</th>
+                            <th class="text-center">Operations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in a %}
+                        <tr>
+                            <td class="company-name">{{ i.admin.company_name }}</td>
+                            <td>
+                                <div class="role-title">{{ i.job_name }}</div>
+                                <span class="sub-text">{{ i.job_qualification }}</span>
+                            </td>
+                            <td><span class="qual-badge">{{ i.job_qualification }}</span></td>
+                            <td>
+                                <div class="skills-container">
+                                    {{ i.job_skill }}
+                                </div>
+                            </td>
+                            <td class="salary-text">{{ i.job_salary }}</td>
+                            <td>
+                                <div class="action-stack">
+                                    <a href="{% url 'job_list_main_edit' i.id %}" class="lnk-edit">Manage</a>
+                                    <a href="{% url 'job_list_main_delete' i.id %}" class="lnk-delete" onclick="return confirm('Archive this job post?')">Remove</a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" class="empty-row">No active job listings found.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruiter Registration | Talent Portal</title>
+    <link rel="stylesheet" href="{% static 'css/signupadmin.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+ 
+    <div class="signup-wrapper">
+        <div class="signup-container">
+            <div class="form-header">
+                <h2>Create Recruiter Account</h2>
+                <p>Register your company to start hiring talent</p>
+            </div>
+
+            <form action="{% url 'adminsignup_load' %}" method="post">
+                {% csrf_token %}
+                
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>First Name</label>
+                        <input type="text" name="fname" placeholder="John" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Last Name</label>
+                        <input type="text" name="lname" placeholder="Doe" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" name="eemail" placeholder="john@company.com" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>Username</label>
+                        <input type="text" name="username" placeholder="johndoe88" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Company Name</label>
+                        <input type="text" name="company" placeholder="TechCorp Inc." required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input type="password" name="pass" placeholder="••••••••" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Confirm Password</label>
+                        <input type="password" name="cpass" placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Complete Registration</button>
+      {% if messages %}
+    <div class="messages-container">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                <span class="alert-icon">
+                    {% if message.tags == 'success' %} ✓ {% else %} ! {% endif %}
+                </span>
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+            </form>
+
+            <div class="form-footer">
+                <p>Already have a recruiter account? <a href="{% url 'adminlog_load' %}">Log In</a></p>
+                <a href="{% url 'display' %}">Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

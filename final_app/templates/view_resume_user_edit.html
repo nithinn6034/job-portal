@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Resume - {{ a.f_name }}</title>
+    <link rel="stylesheet" href="{% static 'css/view_resume_user_edit.css' %}">
+</head>
+<body>
+    <div class="edit-container">
+        <h2>Update Your Information</h2>
+        
+        <form action="{% url 'view_resume_user_edit_load' a.id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="image-upload-section">
+                {% if a.img %}
+                    <div class="current-img-wrapper">
+                        <img src="{{ a.img.url }}" alt="Profile Photo">
+                        <p>Current Profile Photo</p>
+                    </div>
+                {% endif %}
+                <div class="form-group">
+                    <label for="image">Change Profile Photo</label>
+                    <input type="file" name="image" id="image">
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" name="fname" value="{{a.f_name}}">
+                </div>
+
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" name="lname" value="{{a.l_name}}">
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" value="{{a.email}}">
+                </div>
+
+                <div class="form-group">
+                    <label>Date of Birth</label>
+                    <input type="date" name="dob" value="{{ a.dob|date:'Y-m-d' }}">
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="text" name="phnum" value="{{a.phonenumber}}">
+                </div>
+
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" name="loc" value="{{a.location}}">
+                </div>
+
+                <div class="form-group">
+                    <label>Latest Qualification</label>
+                    <input type="text" name="qua" value="{{a.lat_quali}}">
+                </div>
+
+                <div class="form-group">
+                    <label>Skills</label>
+                    <input type="text" name="skill" value="{{a.skill}}">
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Years of Experience</label>
+                    <input type="text" name="yofexp" value="{{a.year_of_exp}}">
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="btn-save">Save Changes</button>
+                <a href="{% url 'view_resume_user' %}" class="btn-cancel">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

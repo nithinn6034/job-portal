@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume - {{ a.f_name }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/view_resume_user.css' %}">
+</head>
+<body>
+
+    <header class="site-header">
+        <nav class="navbar">
+            <div class="logo"><i class="fas fa-file-invoice"></i> Resume<span>Pro</span></div>
+            <ul class="nav-links">
+                <li><a href="{% url 'userfront_load' %}">Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+<main class="content-area">
+    {% if a %}
+        <div class="resume-paper">
+            <div class="resume-header">
+                <div class="profile-box">
+                    {% if a.img %}
+                        <img src="{{ a.img.url }}" alt="Profile Photo" class="resume-img">
+                    {% else %}
+                        <img src="{% static 'images/default-avatar.png' %}" alt="No Photo" class="resume-img">
+                    {% endif %}
+                </div>
+                
+                <div class="resume-contact">
+                    <h1>{{ a.f_name }} {{ a.l_name }}</h1>
+                    <p><i class="fas fa-envelope"></i> {{ a.email }}</p>
+                    <p><i class="fas fa-map-marker-alt"></i> {{ a.location }}</p>
+                    <p><i class="fas fa-phone"></i> {{ a.phonenumber }}</p>
+                </div>
+            </div>
+
+            <div class="resume-footer-actions">
+                <a href="{% url 'view_resume_user_edit' a.id %}" class="btn-primary">Edit Details</a>
+                <a href="javascript:window.print()" class="btn-secondary">Download PDF</a>
+            </div>
+        </div>
+
+    {% else %}
+        <div class="no-resume-container" style="text-align: center; padding: 50px;">
+            <i class="fas fa-file-alt" style="font-size: 80px; color: #ccc;"></i>
+            <h2>No Resume Found</h2>
+            <p>It looks like you haven't added your professional details yet.</p>
+            <br>
+            <a href="{% url 'add_det_for_jobuser' %}" class="btn-primary" style="padding: 10px 20px; text-decoration: none;">
+                Create Your Resume Now
+            </a>
+        </div>
+    {% endif %}
+</main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 ResumePro Builder | Designed for Kerala Tech Talent</p>
+    </footer>
+
+</body>
+</html>

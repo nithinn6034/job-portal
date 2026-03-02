@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruiter Details</title>
+    <link rel="stylesheet" href="{% static 'css/personal_detail_admin.css' %}">
+</head>
+<body>
+
+    <nav class="top-nav">
+        <div class="nav-content">
+            <span class="brand">Admin<span>Panel</span></span>
+            <a href="{% url 'adminfront_load' %}" class="nav-back">&larr; Back to Dashboard</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="page-header">
+            <h1>Recruiter Information</h1>
+            <div class="header-actions">
+                <a href="{% url 'personal_detail_admin_edit' a.id %}" class="btn-primary">Edit Profile</a>
+            </div>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-section">
+                <div class="info-group">
+                    <label>First Name</label>
+                    <p>{{ a.jobadmin.first_name }}</p>
+                </div>
+                <div class="info-group">
+                    <label>Last Name</label>
+                    <p>{{ a.jobadmin.last_name }}</p>
+                </div>
+                <div class="info-group">
+                    <label>Email Address</label>
+                    <p>{{ a.jobadmin.email }}</p>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <div class="info-group">
+                    <label>Username</label>
+                    <p>@{{ a.jobadmin.username }}</p>
+                </div>
+                <div class="info-group">
+                    <label>Company Name</label>
+                    <p class="company-name">{{ a.company_name }}</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

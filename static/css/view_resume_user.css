@@ -1,0 +1,123 @@
+/* General Styling */
+:root {
+    --primary: #2563eb;
+    --dark: #1e293b;
+    --light-bg: #f1f5f9;
+    --text: #334155;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- SITE HEADER --- */
+.site-header {
+    background: var(--dark);
+    padding: 15px 10%;
+    color: white;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo { font-size: 1.4rem; font-weight: 800; }
+.logo span { color: var(--primary); }
+
+.nav-links { list-style: none; display: flex; gap: 25px; }
+.nav-links a { color: white; text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+.nav-links a:hover { color: var(--primary); }
+
+/* --- RESUME MODEL (THE PAPER) --- */
+.content-area {
+    padding: 50px 20px;
+    flex: 1;
+}
+
+.resume-paper {
+    background: white;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 50px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border-top: 8px solid var(--primary);
+}
+
+.resume-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+}
+
+.resume-img {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border: 4px solid #f8fafc;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.resume-contact h1 {
+    font-size: 2.2rem;
+    margin: 0 0 10px 0;
+    color: var(--dark);
+}
+
+.resume-contact p { margin: 5px 0; font-size: 0.95rem; color: #64748b; }
+
+.section-title {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: var(--primary);
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 5px;
+    margin: 25px 0 15px 0;
+}
+
+.skill-tag {
+    background: #eff6ff;
+    color: var(--primary);
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* --- ACTIONS --- */
+.resume-footer-actions {
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px dashed #cbd5e1;
+    display: flex;
+    gap: 15px;
+}
+
+.btn-primary { background: var(--primary); color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; }
+.btn-secondary { background: var(--dark); color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; }
+
+/* --- FOOTER --- */
+.site-footer {
+    text-align: center;
+    padding: 20px;
+    background: white;
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+/* Print Logic: Hide Header/Footer when printing to PDF */
+@media print {
+    .site-header, .site-footer, .resume-footer-actions { display: none; }
+    body { background: white; }
+    .resume-paper { box-shadow: none; padding: 0; margin: 0; width: 100%; }
+}

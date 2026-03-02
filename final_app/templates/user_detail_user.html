@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile | {{ a.jobseeker.username }}</title>
+    <link rel="stylesheet" href="{% static 'css/user_detail_user.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-card">
+            <div class="header-section">
+                <h1>User Profile</h1>
+                <p class="subtitle">Personal Details & Information</p>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-group">
+                    <label>Full Name</label>
+                    <span>{{ a.jobseeker.first_name }} {{ a.jobseeker.last_name }}</span>
+                </div>
+
+                <div class="info-group">
+                    <label>First Name</label>
+                    <span>{{ a.jobseeker.first_name }}</span>
+                </div>
+
+                <div class="info-group">
+                    <label>Last Name</label>
+                    <span>{{ a.jobseeker.last_name }}</span>
+                </div>
+
+                <div class="info-group">
+                    <label>Email Address</label>
+                    <span>{{ a.jobseeker.email }}</span>
+                </div>
+
+                <div class="info-group">
+                    <label>Username</label>
+                    <span>@{{ a.jobseeker.username }}</span>
+                </div>
+
+                <div class="info-group">
+                    <label>Phone Number</label>
+                    <span>{{ a.phonenumber }}</span>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <a href="{% url 'user_detail_user_edit' a.id %}" class="btn btn-edit">Edit Profile</a>
+                <a href="{% url 'userfront_load' %}" class="btn btn-back">Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

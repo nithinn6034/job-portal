@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Application Tracker</title>
+    <link rel="stylesheet" href="{% static 'css/tracker_user.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+ 
+</head>
+<body>
+
+<div class="tracker-container">
+    <h2><i class="fa-solid fa-list-check"></i> My Application Tracker</h2>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Job Name</th>
+                <th>Company</th>
+                <th>Date Applied</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+       <tbody>
+    {% for app in user_apps %}
+    <tr>
+        <td class="job-name">{{ app.job.job_name }}</td>
+        <td class="company-name">{{ app.job.admin.company_name }}</td>
+        <td>{{ app.applied_at|date:"M d, Y" }}</td>
+        <td>
+           <div class="status-wrapper">
+    {% if app.status == "Interview Scheduled" or app.status == "Accepted" %}
+        <span style="color: #2563eb; font-weight: 600;">
+            <i class="fa-solid fa-envelope"></i> {{ app.job.admin.company_name }} will contact you
+        </span>
+    {% elif app.status == "Declined" %}
+        <span style="color: #dc2626; font-weight: 600;">
+            <i class="fa-solid fa-circle-xmark"></i> Declined
+        </span>
+    {% else %}
+        <span style="color: #ea580c;">
+            <i class="fa-solid fa-clock"></i> Pending Review
+        </span>
+    {% endif %}
+</div>
+            </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="4" class="empty-state">You haven't applied for any jobs yet.</td>
+    </tr>
+    {% endfor %}
+</tbody>
+    </table>
+</div>
+ <a href="{% url 'userfront_load' %}" class="btn-back">Back to Dashboard</a>
+</body>
+</html>

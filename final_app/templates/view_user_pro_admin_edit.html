@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Profile</title>
+    <link rel="stylesheet" href="{% static 'css/view_user_pro_adimin_edit.css' %}">
+</head>
+<body class="bg-light">
+
+<div class="edit-card">
+    <div class="card-header">
+        <h3>Update Jobseeker Details</h3>
+        <p>Ensure the information below is accurate before saving.</p>
+    </div>
+
+    <form action="{% url 'view_user_pro_admin_edit_load' i.id %}" method="post">
+        {% csrf_token %}
+        
+        <div class="input-row">
+            <div class="field">
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" name="fname" value="{{ i.f_name }}" placeholder="Enter first name">
+            </div>
+            <div class="field">
+                <label for="lname">Last Name</label>
+                <input type="text" id="lname" name="lname" value="{{ i.l_name }}" placeholder="Enter last name">
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" value="{{ i.email }}">
+        </div>
+
+        <div class="input-row">
+            <div class="field">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" name="dob" value="{{ i.dob|date:'Y-m-d' }}">
+            </div>
+            <div class="field">
+                <label for="phnum">Phone Number</label>
+                <input type="text" id="phnum" name="phnum" value="{{ i.phonenumber }}">
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="loc">Current Location</label>
+            <input type="text" id="loc" name="loc" value="{{ i.location }}">
+        </div>
+
+        <div class="input-row">
+            <div class="field">
+                <label for="qua">Qualification</label>
+                <input type="text" id="qua" name="qua" value="{{ i.lat_quali }}">
+            </div>
+            <div class="field">
+                <label for="exp">Experience (Yrs)</label>
+                <input type="number" id="exp" name="exp" value="{{ i.year_of_exp }}">
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="skill">Key Skills</label>
+            <textarea name="skill" id="skill" rows="3">{{ i.skill }}</textarea>
+        </div>
+
+        <div class="button-group">
+            <button type="submit" class="btn-primary">Update Profile</button>
+            <a href="{% url 'view_user_pro_admin' %}" class="btn-link">Go Back</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

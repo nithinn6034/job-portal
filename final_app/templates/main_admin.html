@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/main_admin.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Admin<span>Panel</span></div>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </nav>
+
+    <main class="container">
+        <h1>Management Overview</h1>
+        <div class="card-grid">
+            <a href="{% url 'recru_list_main' %}" class="card">
+                <div class="card-icon">🏢</div>
+                <h3>Recruiter List</h3>
+                <p>Manage and verify recruiter profiles.</p>
+            </a>
+
+            <a href="{% url 'job_seeker_list_main' %}" class="card">
+                <div class="card-icon">👤</div>
+                <h3>Job Seeker List</h3>
+                <p>View and edit registered candidates.</p>
+            </a>
+
+            <a href="{% url 'job_list_main' %}" class="card">
+                <div class="card-icon">💼</div>
+                <h3>Job List</h3>
+                <p>Review and moderate job postings.</p>
+            </a>
+        </div>
+    </main>
+</body>
+</html>

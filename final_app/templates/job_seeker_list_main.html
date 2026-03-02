@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Seeker Management</title>
+    <link rel="stylesheet" href="{% static 'css/job_seeker_list_main.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="admin-wrapper">
+        <header class="top-bar">
+            <div class="title-section">
+                <h1>Job Seekers</h1>
+                <span class="count-badge">{{ a|length }} Total Candidates</span>
+            </div>
+            <a href="{% url 'main_admin' %}" class="back-link">← Dashboard</a>
+        </header>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Candidate Name</th>
+                        <th>Email Address</th>
+                        <th>Username</th>
+                        <th>Phone Number</th>
+                        <th class="actions-head">Management</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in a %}
+                    <tr>
+                        <td>
+                            <div class="name-cell">
+                                <div class="avatar">{{ i.jobseeker.first_name|slice:":1" }}</div>
+                                <span>{{ i.jobseeker.first_name }} {{ i.jobseeker.last_name }}</span>
+                            </div>
+                        </td>
+                        <td>{{ i.jobseeker.email }}</td>
+                        <td><span class="tag">@{{ i.jobseeker.username }}</span></td>
+                        <td>{{ i.phonenumber }}</td>
+                        <td>
+                            <div class="action-group">
+                                <a href="{% url 'job_seeker_list_main_edit' i.id %}" class="btn-edit">Edit</a>
+                                <a href="{% url 'jobseeker_main_delete' i.id %}" class="btn-delete" onclick="return confirm('Remove this candidate?')">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="no-data">No job seekers registered yet.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

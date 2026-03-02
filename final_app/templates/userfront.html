@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/userfront.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h3>JobPortal</h3>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="{% url 'add_det_for_jobuser' %}"><span>📝</span> Resume Creation</a></li>
+                <li><a href="{% url 'view_resume_user' %}"><span>📄</span> View Resume</a></li>
+                <li><a href="{% url 'vac_of_job' %}"><span>💼</span> Job Vacancies</a></li>
+                <li><a href="{% url 'user_detail_user' %}"><span>👤</span> User Details</a></li>
+                <li><a href="{% url 'tracker_user' %}">Tracker</a></li>
+                
+                <li class="logout-item">
+                    <form action="{% url 'logout' %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="logout-link-btn">
+                            <span>🚪</span> Logout
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <h2>Welcome, {{ request.user.first_name }} {{ request.user.last_name }}</h2>
+            </header>
+
+            <section class="content-card">
+                <h3>Quick Actions</h3>
+                <div class="status-grid">
+                    <div class="status-item"><strong>Username:</strong> {{ request.user.username }}</div>
+                    <div class="status-item"><strong>Email:</strong> {{ request.user.email }}</div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

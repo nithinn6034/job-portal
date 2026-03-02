@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Recruiter | CareerMatch</title>
+    <link rel="stylesheet" href="{% static 'css/recru_list_main_edit.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="nav-container">
+            <div class="logo">CAREER<span>MATCH</span></div>
+            <nav>
+                <a href="{% url 'main_admin' %}">Dashboard</a>
+                <a href="{% url 'recru_list_main' %}">Recruiters</a>
+                <a href="{% url 'logout' %}" class="btn-logout">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="content-wrapper">
+        <div class="form-container">
+            <div class="glass-card">
+                <h2>Edit Recruiter Profile</h2>
+                <p class="subtitle">Update account details for <strong>{{a.company_name}}</strong></p>
+
+                <form action="{% url 'recru_list_main_edit_load' a.id %}" method="post">
+                    {% csrf_token %}
+                    
+                    <div class="input-group">
+                        <label>First Name</label>
+                        <input type="text" name="fname" value="{{a.jobadmin.first_name}}" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Last Name</label>
+                        <input type="text" name="lname" value="{{a.jobadmin.last_name}}" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Email Address</label>
+                        <input type="email" name="email" value="{{a.jobadmin.email}}" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Username</label>
+                        <input type="text" name="username" value="{{a.jobadmin.username}}" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Company Name</label>
+                        <input type="text" name="com_name" value="{{a.company_name}}" required>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Update Details</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2026 CareerMatch. All rights reserved. | <a href="#">Support</a></p>
+        </div>
+    </footer>
+
+</body>
+</html>

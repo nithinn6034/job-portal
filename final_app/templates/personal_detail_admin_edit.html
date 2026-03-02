@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Recruiter Detail</title>
+    <link rel="stylesheet" href="{% static 'css/personal_detail_admin_edit.css' %}">
+</head>
+<body>
+
+<div class="dashboard-wrapper">
+    <header class="admin-header">
+        <h1>Edit Recruiter Profile</h1>
+        <p>Update the account information for <strong>{{ a.jobadmin.username }}</strong></p>
+    </header>
+
+    <div class="content-area">
+        <form action="{% url 'personal_detail_admin_edit_load' a.id %}" method="post" class="standard-form">
+            {% csrf_token %}
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="fname">First Name</label>
+                    <input type="text" id="fname" name="fname" value="{{ a.jobadmin.first_name }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="lname">Last Name</label>
+                    <input type="text" id="lname" name="lname" value="{{ a.jobadmin.last_name }}" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" value="{{ a.jobadmin.email }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="usname">Username</label>
+                <input type="text" id="usname" name="usname" value="{{ a.jobadmin.username }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="comname">Company Name</label>
+                <input type="text" id="comname" name="comname" value="{{ a.company_name }}">
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-submit">Save Changes</button>
+                <a href="{% url 'personal_detail_admin' %}" class="btn-link">Cancel and Go Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
