@@ -30,13 +30,15 @@
                 <a href="{% url 'signup_load_admin' %}">BACK TO SIGNUP PAGE</a>  <br>
 <a href="{% url 'display' %}">Back to Dashboard</a>
             </div>
-               {% if messages %}
-                    <div class="message-container">
-                        {% for i in messages %}
-                            <p class="error-msg">{{ i }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
+             {% if messages %}
+    <div class="message-container">
+        {% for message in messages %}
+            <p class="error-msg {% if message.tags %}{{ message.tags }}{% endif %}">
+                {{ message }}
+            </p>
+        {% endfor %}
+    </div>
+{% endif %}
         </form>
     </div>
 </body>

@@ -1,0 +1,141 @@
+/* Base Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, sans-serif;
+    background-color: #f9fafb;
+    color: #111827;
+}
+
+.dashboard-container {
+    padding: 40px;
+    max-width: 1200px; /* Maintains left alignment but prevents excessive stretching */
+}
+
+/* Header */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 30px;
+}
+
+.header-text h1 {
+    margin: 0 0 8px 0;
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+.header-text p {
+    margin: 0;
+    color: #6b7280;
+}
+
+.btn-add {
+    background-color: #2563eb;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.btn-add:hover { background-color: #1d4ed8; }
+
+/* Table Styling */
+.table-responsive {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden; /* Clips corners of the table */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.admin-table thead {
+    background-color: #f8fafc;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.admin-table th {
+    padding: 14px 20px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #4b5563;
+    font-weight: 700;
+}
+
+.admin-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 0.95rem;
+    vertical-align: middle;
+}
+
+.admin-table tr:hover {
+    background-color: #f9fafb;
+}
+
+/* Specific Cell Styles */
+.job-title {
+    font-weight: 600;
+    color: #111827;
+}
+
+.skill-tag {
+    display: inline-block;
+    background: #eff6ff;
+    color: #1e40af;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+/* Action Links */
+.actions {
+    display: flex;
+    gap: 15px;
+}
+
+.link-edit {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.link-delete {
+    color: #dc2626;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.link-edit:hover, .link-delete:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+.footer-nav {
+    margin-top: 25px;
+}
+
+.back-link {
+    text-decoration: none;
+    color: #6b7280;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.back-link:hover { color: #111827; }
+
+.empty-state {
+    padding: 40px !important;
+    text-align: center;
+    color: #9ca3af;
+}

@@ -10,6 +10,20 @@
 <body>
     <div class="signup-container">
         <h1>Create Account</h1>
+        <div class="signup-container">
+
+
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    
         <form action="{% url 'usersignup_load' %}" method="post">
             {% csrf_token %}
             
@@ -30,6 +44,7 @@
             
             <p class="footer-text">Already have an account? <a href="{% url 'login_load_user' %}">Login here</a></p>
             <p class="footer-text"><a href="{% url 'display' %}">Back to Dashboard</a></p>
+        
         </form>
     </div>
 </body>

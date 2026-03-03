@@ -1,0 +1,147 @@
+:root {
+    --emerald: #059669;
+    --emerald-light: #ecfdf5;
+    --slate-900: #0f172a;
+    --slate-600: #475569;
+    --slate-200: #e2e8f0;
+    --white: #ffffff;
+    --bg: #f8fafc;
+    --red: #e11d48;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    color: var(--slate-900);
+    margin: 0;
+    padding: 2rem;
+}
+
+.admin-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header Styling */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2.5rem;
+    border-left: 4px solid var(--emerald);
+    padding-left: 1.5rem;
+}
+
+.header-text h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.header-text p {
+    color: var(--slate-600);
+    margin: 0.2rem 0 0 0;
+}
+
+.btn-back {
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--emerald);
+    border: 1px solid var(--emerald);
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.btn-back:hover {
+    background: var(--emerald);
+    color: white;
+}
+
+/* Table Card */
+.table-card {
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+    border: 1px solid var(--slate-200);
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #f1f5f9;
+    padding: 1.2rem 1.5rem;
+    text-align: left;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--slate-600);
+}
+
+td {
+    padding: 1.2rem 1.5rem;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+}
+
+/* Typography & Badges */
+.company-name {
+    font-weight: 700;
+    color: var(--emerald);
+}
+
+.role-title {
+    font-weight: 600;
+    color: var(--slate-900);
+}
+
+.sub-text {
+    font-size: 0.8rem;
+    color: var(--slate-600);
+}
+
+.qual-badge {
+    background: var(--emerald-light);
+    color: var(--emerald);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.salary-text {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
+    color: #065f46;
+}
+
+/* Actions */
+.action-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.lnk-edit, .lnk-delete {
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.lnk-edit { color: var(--emerald); }
+.lnk-delete { color: var(--red); }
+
+.lnk-edit:hover, .lnk-delete:hover {
+    opacity: 0.7;
+}
+
+.empty-row {
+    text-align: center;
+    padding: 5rem !important;
+    color: var(--slate-600);
+}

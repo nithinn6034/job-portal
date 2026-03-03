@@ -4,29 +4,31 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard</title>
+    <title>User Dashboard | JobPortal</title>
     <link rel="stylesheet" href="{% static 'css/userfront.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="dashboard-container">
         <nav class="sidebar">
             <div class="sidebar-header">
+                <div class="logo-icon">JP</div>
                 <h3>JobPortal</h3>
             </div>
             
             <ul class="nav-links">
-                <li><a href="{% url 'add_det_for_jobuser' %}"><span>📝</span> Resume Creation</a></li>
-                <li><a href="{% url 'view_resume_user' %}"><span>📄</span> View Resume</a></li>
-                <li><a href="{% url 'vac_of_job' %}"><span>💼</span> Job Vacancies</a></li>
-                <li><a href="{% url 'user_detail_user' %}"><span>👤</span> User Details</a></li>
-                <li><a href="{% url 'tracker_user' %}">Tracker</a></li>
+                <li class="active"><a href="{% url 'userfront_load' %}"><span>🏠</span> Overview</a></li>
+                <li><a href="{% url 'add_det_for_jobuser' %}"><span>📝</span> Build Resume</a></li>
+                <li><a href="{% url 'view_resume_user' %}"><span>📄</span> My Resume</a></li>
+                <li><a href="{% url 'vac_of_job' %}"><span>💼</span> Discover Jobs</a></li>
+                <li><a href="{% url 'user_detail_user' %}"><span>👤</span> Account</a></li>
+                <li><a href="{% url 'tracker_user' %}"><span>📈</span> Application Tracker</a></li>
                 
                 <li class="logout-item">
                     <form action="{% url 'logout' %}" method="POST">
                         {% csrf_token %}
-                        <button type="submit" class="logout-link-btn">
-                            <span>🚪</span> Logout
+                        <button type="submit" class="logout-btn">
+                            <span>🚀</span> Logout
                         </button>
                     </form>
                 </li>
@@ -35,16 +37,83 @@
 
         <main class="main-content">
             <header class="top-bar">
-                <h2>Welcome, {{ request.user.first_name }} {{ request.user.last_name }}</h2>
+                <div class="header-content">
+                    <h1>Hello, {{ request.user.first_name }}! 👋</h1>
+                    <p>It's a great day to advance your career.</p>
+                </div>
+                <div class="user-badge">
+                    <span class="status-indicator"></span>
+                    Candidate Portal
+                </div>
             </header>
 
-            <section class="content-card">
-                <h3>Quick Actions</h3>
-                <div class="status-grid">
-                    <div class="status-item"><strong>Username:</strong> {{ request.user.username }}</div>
-                    <div class="status-item"><strong>Email:</strong> {{ request.user.email }}</div>
+            <div class="dashboard-grid">
+                
+                <div class="left-col">
+                    <section class="glass-card welcome-card">
+                        <div class="card-header">
+                            <h3>Professional Summary</h3>
+                            <span class="badge-new">Updated</span>
+                        </div>
+                        <p class="summary-text">
+                            Welcome to your personalized career command center. Currently, you are managing your 
+                            professional journey under the profile of <strong>{{ request.user.get_full_name }}</strong>. 
+                            Your dashboard is synchronized with <em>{{ request.user.email }}</em> to ensure 
+                            you receive real-time updates on your applications.
+                        </p>
+                        <p class="summary-text">
+                            Maximize your potential by exploring our latest <strong>Job Vacancies</strong>. 
+                            Our platform uses your saved resume details to highlight roles that best match 
+                            your technical expertise and location preferences.
+                        </p>
+                        <div class="card-actions">
+                            <a href="{% url 'vac_of_job' %}" class="btn-glow">Explore Opportunities</a>
+                            <a href="{% url 'tracker_user' %}" class="btn-outline">View History</a>
+                        </div>
+                    </section>
+
+                    <section class="glass-card tips-card">
+                        <h3>Career Tips</h3>
+                        <div class="tips-grid">
+                            <div class="tip-item">
+                                <strong>Optimization</strong>
+                                <p>Ensure your skills match the job keywords.</p>
+                            </div>
+                            <div class="tip-item">
+                                <strong>Consistency</strong>
+                                <p>Check your tracker daily for status changes.</p>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-            </section>
+
+                <div class="right-col">
+                    <section class="glass-card status-card">
+                        <h3>Application Metrics</h3>
+                        <div class="metric-item">
+                            <div class="metric-label">Total Applied</div>
+                            <div class="metric-value">{{ total_apps|default:"0" }}</div>
+                        </div>
+                        <div class="metric-item accent-pending">
+                            <div class="metric-label">In Review</div>
+                            <div class="metric-value">{{ pending|default:"0" }}</div>
+                        </div>
+                        <div class="metric-item accent-success">
+                            <div class="metric-label">Accepted</div>
+                            <div class="metric-value">{{ accepted|default:"0" }}</div>
+                        </div>
+                    </section>
+
+                    <section class="glass-card quick-access">
+                        <h3>Quick Access</h3>
+                        <ul class="quick-nav">
+                            <li><a href="{% url 'user_detail_user' %}">Update Password</a></li>
+                            <li><a href="{% url 'view_resume_user' %}">Download Resume PDF</a></li>
+                           
+                    </section>
+                </div>
+
+            </div>
         </main>
     </div>
 </body>

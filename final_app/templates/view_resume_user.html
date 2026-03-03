@@ -6,83 +6,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume - {{ a.f_name }}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/view_resume_user.css' %}">
 </head>
 <body>
 
-    <header class="site-header">
+    <header class="site-header no-print">
         <nav class="navbar">
-            <div class="logo"><i class="fas fa-file-invoice"></i> Resume<span>Pro</span></div>
+            <div class="logo"><i class="fas fa-crown"></i> Resume<span>Pro</span></div>
             <ul class="nav-links">
                 <li><a href="{% url 'userfront_load' %}">Dashboard</a></li>
-                <li><a href="{% url 'logout' %}">Logout</a></li>
+                <li><a href="{% url 'logout' %}" class="logout-btn">Logout</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="content-area">
         {% if a %}
-            <div class="resume-paper">
-                <div class="resume-header">
-                    <div class="profile-box">
-                        {% if a.img %}
-                            <img src="{{ a.img.url }}" alt="Profile Photo" class="resume-img">
-                        {% else %}
-                            <img src="{% static 'images/default-avatar.png' %}" alt="No Photo" class="resume-img">
-                        {% endif %}
-                    </div>
-                    
-                    <div class="resume-contact">
-                        <h1>{{ a.f_name }} {{ a.l_name }}</h1>
-                        <p><i class="fas fa-envelope"></i> {{ a.email }}</p>
-                        <p><i class="fas fa-map-marker-alt"></i> {{ a.location }}</p>
-                        <p><i class="fas fa-phone"></i> {{ a.phonenumber }}</p>
-                        {% if a.dob %}
-                            <p><i class="fas fa-calendar-alt"></i> DOB: {{ a.dob }}</p>
-                        {% endif %}
-                    </div>
-                </div>
-
-                <hr class="resume-divider">
-
-                <div class="resume-body">
-                    <div class="resume-section">
-                        <h3><i class="fas fa-graduation-cap"></i> Education & Experience</h3>
-                        <p><strong>Qualification:</strong><br>{{ a.lat_quali }}</p>
-                        <p><strong>Years of Experience:</strong><br>{{ a.year_of_exp }} Year{{ a.year_of_exp|pluralize }}</p>
-                    </div>
-
-                    <div class="resume-section">
-                        <h3><i class="fas fa-tools"></i> Skills & Expertise</h3>
-                        <div class="skills-container">
-                            {% if a.skill %}
-                                {% for s in a.get_skills_list %}
-                                    <span class="skill-badge">{{ s }}</span>
-                                {% endfor %}
+            <div class="resume-paper animate-up">
+                <div class="resume-layout">
+                    <div class="resume-sidebar">
+                        <div class="profile-frame">
+                            {% if a.img %}
+                                <img src="{{ a.img.url }}" alt="Profile Photo" class="resume-img">
                             {% else %}
-                                <p>No skills listed.</p>
+                                <img src="{% static 'images/default-avatar.png' %}" alt="No Photo" class="resume-img">
                             {% endif %}
+                        </div>
+                        
+                        <div class="sidebar-info">
+                            <h3>Contact</h3>
+                            <p><i class="fas fa-envelope"></i> {{ a.email }}</p>
+                            <p><i class="fas fa-phone"></i> {{ a.phonenumber }}</p>
+                            <p><i class="fas fa-map-marker-alt"></i> {{ a.location }}</p>
+                            {% if a.dob %}
+                                <p><i class="fas fa-calendar-alt"></i> {{ a.dob }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="resume-main">
+                        <div class="main-header">
+                            <h1>{{ a.f_name }} <span class="last-name">{{ a.l_name }}</span></h1>
+                            <div class="job-title-tag">{{ a.lat_quali }} Professional</div>
+                        </div>
+
+                        <div class="resume-section">
+                            <h2 class="section-title">Professional Summary</h2>
+                            <p class="summary-text">
+                                Result-oriented professional with {{ a.year_of_exp }} year{{ a.year_of_exp|pluralize }} of experience. 
+                                Specialized in {{ a.lat_quali }} with a strong focus on technical excellence and problem-solving.
+                            </p>
+                        </div>
+
+                        <div class="resume-section">
+                            <h2 class="section-title">Core Expertise</h2>
+                            <div class="skills-grid">
+                                {% if a.skill %}
+                                    {% for s in a.get_skills_list %}
+                                        <div class="skill-pill">{{ s }}</div>
+                                    {% endfor %}
+                                {% else %}
+                                    <p>No skills listed.</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="resume-section">
+                            <h2 class="section-title">Education & Credentials</h2>
+                            <div class="edu-item">
+                                <strong>{{ a.lat_quali }}</strong>
+                                <p>Major Field of Study</p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="resume-footer-actions">
-                    <a href="{% url 'view_resume_user_edit' a.id %}" class="btn-primary">Edit Details</a>
-                    <a href="javascript:window.print()" class="btn-secondary">Download PDF</a>
+                <div class="resume-footer-actions no-print">
+                    <a href="{% url 'view_resume_user_edit' a.id %}" class="btn-edit"><i class="fas fa-edit"></i> Edit Details</a>
+                    <a href="javascript:window.print()" class="btn-download"><i class="fas fa-download"></i> Download PDF</a>
                 </div>
             </div>
         {% else %}
-            <div class="no-resume-container">
-                <i class="fas fa-file-alt" style="font-size: 50px; color: #ccc;"></i>
-                <h2>No Resume Found</h2>
-                <a href="{% url 'add_det_for_jobuser' %}" class="btn-primary">Create Your Resume</a>
+            <div class="no-resume-container glass-card">
+                <div class="empty-icon"><i class="fas fa-file-signature"></i></div>
+                <h2>Ready to get hired?</h2>
+                <p>You haven't created your professional resume yet.</p>
+                <a href="{% url 'add_det_for_jobuser' %}" class="btn-create">Create My Resume</a>
             </div>
         {% endif %}
     </main>
-
-    <footer class="site-footer">
-        <p>&copy; 2026 ResumePro | Powered by Django 6.0</p>
-    </footer>
 
 </body>
 </html>

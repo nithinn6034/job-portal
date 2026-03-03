@@ -1,0 +1,165 @@
+:root {
+    --primary: #6366f1;
+    --text-main: #1e293b;
+    --text-sub: #64748b;
+    --bg-light: #fdfdff;
+    --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.04);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Jost', sans-serif;
+}
+
+body {
+    background-color: #f8fafc;
+    color: var(--text-main);
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.main-header {
+    background: white;
+    padding: 15px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.logo-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--primary);
+    border-radius: 8px;
+}
+
+.logo span span { color: var(--primary); }
+
+.top-nav a {
+    text-decoration: none;
+    color: var(--text-sub);
+    margin: 0 15px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.top-nav a.active, .top-nav a:hover { color: var(--primary); }
+
+.user-meta { display: flex; align-items: center; gap: 20px; }
+
+.avatar {
+    width: 35px;
+    height: 35px;
+    background: #e2e8f0;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-weight: 600;
+    color: var(--text-sub);
+}
+
+/* Dashboard Content */
+.dashboard-area { padding: 50px 0; }
+
+.welcome-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.welcome-bar h1 { font-size: 28px; }
+.welcome-bar p { color: var(--text-sub); }
+
+.primary-btn {
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+}
+
+/* Function Grid */
+.function-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.f-card {
+    background: white;
+    text-decoration: none;
+    padding: 30px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    transition: 0.3s;
+    box-shadow: var(--card-shadow);
+    border: 1px solid transparent;
+}
+
+.f-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+}
+
+.f-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    font-size: 24px;
+}
+
+/* Icon Colors */
+.bg-soft-blue { background: #eff6ff; color: #3b82f6; }
+.bg-soft-green { background: #f0fdf4; color: #22c55e; }
+.bg-soft-orange { background: #fff7ed; color: #f97316; }
+.bg-soft-purple { background: #faf5ff; color: #a855f7; }
+
+.f-info h3 { font-size: 18px; color: var(--text-main); margin-bottom: 4px; }
+.f-info p { font-size: 14px; color: var(--text-sub); }
+
+@media (max-width: 768px) {
+    .function-grid { grid-template-columns: 1fr; }
+}
+
+.logout-btn-header {
+    background: none;
+    border: none;
+    color: var(--text-sub);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 5px;
+    transition: 0.3s;
+}
+
+.logout-btn-header:hover {
+    color: #ef4444; /* Turns red on hover */
+}

@@ -47,8 +47,21 @@ def signup_load_admin(request):
 
 
 def userfront_load(request):
+    # Get user profile
     profile = usertables.objects.filter(jobseeker=request.user).first()
-    return render(request, 'userfront.html', {'profile': profile})
+    
+    # NEW: Fetch counts for the dashboard statistics
+    total_applications = AppliedJob.objects.filter(user=request.user).count()
+    pending_apps = AppliedJob.objects.filter(user=request.user, status='Pending').count()
+    accepted_apps = AppliedJob.objects.filter(user=request.user, status='Accepted').count()
+    
+    context = {
+        'profile': profile,
+        'total_apps': total_applications,
+        'pending': pending_apps,
+        'accepted': accepted_apps
+    }
+    return render(request, 'userfront.html', context)
 
 def adminfront_load(request):
     return render (request,'adminfront.html')
@@ -386,7 +399,7 @@ def add_job(request):
             job_qualification=quali
         )
         add.save()
-
+        messages.success(request, "Job posted successfully!")
         return redirect ('addjobadmin')
 
 def det_fo_jobuser_save(request):
